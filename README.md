@@ -38,7 +38,7 @@ I'm not a security professional. I'm starting with no prior background in SOC wo
 | Linux telemetry | `auditd`, `syslog`/`journald`, web-server logs |
 | Network monitoring | Suricata and Zeek |
 | Detection rules | Sigma, Wazuh rules and decoders |
-| Threat intelligence | MISP (self-hosted), plus free tiers of VirusTotal and AbuseIPDB |
+| Threat intelligence | Free tiers of VirusTotal, AbuseIPDB, AlienVault OTX and URLhaus (MISP studied as theory) |
 | Automation | Python, Bash, PowerShell, optionally Shuffle |
 | Practice platforms | CyberDefenders, BlueTeamLabs Online, TryHackMe free rooms, Splunk BOTS, LetsDefend free tier |
 
