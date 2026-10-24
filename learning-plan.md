@@ -41,7 +41,7 @@ Lesson files use the headings: *Objectives, Theory, Lab, Result, Troubleshooting
 | | 10 | Detection engineering II: Sigma, tuning, detection-as-code | 6 | P1 / P5 |
 | | 11 | Alerting, triage and investigation workflow | 6 | P2 / P4 |
 | **D. Network and intelligence** | 12 | Network security monitoring (Suricata, Zeek) | 8 | P6 |
-| | 13 | Threat intelligence and IOCs | 5 | P7 |
+| | 13 | Threat intelligence and IOCs | 5 | P1 |
 | **E. Attack, response and hunting** | 14 | Attack-to-detection labs | 10 | P2 / P4 |
 | | 15 | Incident response, playbooks, phishing and malware triage | 8 | P2 / P4 |
 | | 16 | Threat hunting | 6 | P2 / P4 |
@@ -65,8 +65,8 @@ My laptop has an Intel Core i5-1335U (10 cores, 12 threads), 16 GB RAM and a sin
 | **P3** | Wazuh server + Windows 11 evaluation VM (4 GB) | 8 to 10 GB | Windows telemetry |
 | **P4** | P3 + Kali (1 to 2 GB) | 10 to 12 GB | Windows attack-to-detection (tight, measure first) |
 | **P5** | Splunk VM (4 GB) + endpoint (1.5 GB), **Wazuh powered off** | 6 GB | Splunk SPL practice |
-| **P6** | Suricata/Zeek sensor (3 GB) + Kali + one target | about 6 GB | Network monitoring |
-| **P7** | MISP VM (4 GB), nothing else heavy | 4 to 5 GB | Threat intelligence |
+| **P6** | Ubuntu endpoint running Suricata and Zeek (about 3 GB) + Kali (1 to 2 GB) | about 4 to 5 GB | Network monitoring |
+| **P7 (optional)** | MISP VM (4 GB), nothing else heavy | 4 to 5 GB | Only if space and RAM remain after the capstone |
 
 Rules I follow: one SIEM at a time, suspend (save state) instead of shutting down, give each VM 2 vCPUs unless a lab needs more, and use headless installs wherever possible. If P4 does not fit when I measure it in Module 7, I will lower the Windows VM's footprint or run the Kali attack step separately and record that decision.
 
@@ -315,11 +315,11 @@ Rules I follow: one SIEM at a time, suspend (save state) instead of shutting dow
 - PCAP analysis workflow with `tshark` and Wireshark
 
 **Labs:**
-1. Deploy a sensor VM (P6) with Suricata and Zeek.
+1. Install Suricata and Zeek on my existing Ubuntu VM (P6) and raise its RAM to about 3 GB for these labs; there is no separate sensor VM.
 2. Generate scans and web attacks from Kali; examine Suricata alerts and Zeek logs for the same traffic.
 3. Write two custom Suricata rules.
 4. Forward `eve.json` into Wazuh.
-5. Analyse a public training PCAP.
+5. Analyse a public training PCAP (this also covers traffic my Ubuntu-hosted sensor cannot see, such as attacks on the Windows VM).
 
 **Deliverables:** sensor setup notes, custom Suricata rules, Zeek query cheatsheet, one network investigation.
 **Ethics hook:** public PCAPs can contain live malware traffic; I only inspect them as data, never execute anything.
@@ -329,13 +329,13 @@ Rules I follow: one SIEM at a time, suspend (save state) instead of shutting dow
 **Theory notes:**
 - IOC types; Pyramid of Pain; TTPs; confidence and expiry; STIX/TAXII overview
 - Free sources: VirusTotal, AbuseIPDB, AlienVault OTX, URLhaus (I verify API limits)
-- MISP (self-hosted), feeds, events, attributes, tagging
+- MISP concepts (events, attributes, tagging, feeds) studied from its documentation; installing it is optional (P7)
 - YARA basics; OSINT methods; ATT&CK-based intelligence
 
 **Labs:**
-1. Deploy MISP (P7) and add one open feed.
+1. Study MISP's data model from its documentation and sketch one event with attributes and tags on paper; I install it only if space remains at the end (P7, optional).
 2. Enrich sample IPs and hashes with free APIs, storing keys outside the repo.
-3. Import an IOC list into a Wazuh CDB list and build a rule that uses it.
+3. Import an IOC list from a free open feed (for example URLhaus) into a Wazuh CDB list and build a rule that uses it.
 4. Write one simple YARA rule and test it on harmless sample files.
 
 **Deliverables:** enrichment notes, IOC handling checklist, CDB-list rule, YARA rule.
