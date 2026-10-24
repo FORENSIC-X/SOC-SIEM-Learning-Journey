@@ -1,6 +1,6 @@
 # Repository Plan: soc-siem-learning-journey
 
-This is my plan for how this repository is organised, named, written and committed. The module content itself lives in `learning-plan.md`.
+This is my plan for how this repository is organised, named, written and committed. The module content itself lives in `Learning-Plan.md`.
 
 ---
 
